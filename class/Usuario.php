@@ -45,11 +45,8 @@ class Usuario {
 			":ID"=>$id
 		));
 		if(isset($result[0])){
-			$row = $result[0];
-			$this->setIdusuario($row['idusuario']);
-			$this->SetDeslogin($row['deslogin']);
-			$this->setDesenha($row['desenha']);
-			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+			$this->setData($result[0]);
 		}
 	}
 
@@ -74,11 +71,10 @@ class Usuario {
 			":PASSWORD"=>$password
 		));
 		if(isset($result[0])){
-			$row = $result[0];
-			$this->setIdusuario($row['idusuario']);
-			$this->SetDeslogin($row['deslogin']);
-			$this->setDesenha($row['desenha']);
-			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+			$this->setData($result[0]);
+
+
 		}else{
 			throw new Exception("Login ou senha invalidos", 1);
 			
@@ -87,6 +83,37 @@ class Usuario {
 	}
 
 
+public function setData($data){
+
+			$this->setIdusuario($data['idusuario']);
+			$this->SetDeslogin($data['deslogin']);
+			$this->setDesenha($data['desenha']);
+			$this->setDtcadastro(new DateTime($data['dtcadastro']));
+
+}
+
+
+public function insert(){
+
+	$sql = new Sql();
+
+	$results = $sql->select("CALL sp_usuarios_insert(:LOGIN,:PASSWORD)",array(
+		':LOGIN'=>$this->getDeslogin(),
+		':PASSWORD'=>$this->getDesenha()
+	));
+
+	if(count($results)>0){
+		$this->setData($results[0]);
+	}
+
+}
+
+
+public function __construct($login = "",$password = ""){
+	$this->SetDeslogin($login);
+	$this->setDesenha($password);
+
+}
 
 	public function __toString(){
 		return json_encode(array(

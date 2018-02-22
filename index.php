@@ -21,9 +21,14 @@ echo json_encode($lista);*/
 
 echo json_encode($search);*/
 
-$usuario = new Usuario();
+/*$usuario = new Usuario();
 $usuario->login("josee","123456789");
 
-echo $usuario;
+echo $usuario;*/
+$aluno = new Usuario("aluno","lun0");
+
+$aluno->insert();
+echo $aluno;
+
 
  ?> 
