@@ -25,10 +25,20 @@ echo json_encode($search);*/
 $usuario->login("josee","123456789");
 
 echo $usuario;*/
+
+/*
+inseet
 $aluno = new Usuario("aluno","lun0");
 
 $aluno->insert();
-echo $aluno;
+echo $aluno;*/
+
+$usuario = new Usuario();
+$usuario->loadById(8);
+
+$usuario->update("professor","professor");
+
+echo $usuario;
 
 
  ?> 

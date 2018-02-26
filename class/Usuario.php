@@ -108,6 +108,19 @@ public function insert(){
 
 }
 
+public function update($login,$password){
+	$this->SetDeslogin($login);
+	$this->setDesenha($password);
+	$sql = new Sql();
+	
+	$sql-> query("UPDATE tb_usuarios SET deslogin = :LOGIN, desenha = :PASSWORD WHERE idusuario = :ID",array(
+		':LOGIN'=>$this->getDeslogin(),
+		':PASSWORD'=> $this->getDesenha(),
+		':ID'=> $this->getIdusuario()
+	));
+
+}
+
 
 public function __construct($login = "",$password = ""){
 	$this->SetDeslogin($login);
