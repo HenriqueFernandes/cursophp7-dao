@@ -112,7 +112,7 @@ public function update($login,$password){
 	$this->SetDeslogin($login);
 	$this->setDesenha($password);
 	$sql = new Sql();
-	
+
 	$sql-> query("UPDATE tb_usuarios SET deslogin = :LOGIN, desenha = :PASSWORD WHERE idusuario = :ID",array(
 		':LOGIN'=>$this->getDeslogin(),
 		':PASSWORD'=> $this->getDesenha(),
@@ -121,6 +121,16 @@ public function update($login,$password){
 
 }
 
+public function delete(){
+	$sql = new Sql();
+	$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID",array(
+		':ID'=>$this->getIdusuario()
+	));
+	$this->setIdusuario(0);
+	$this->SetDeslogin("");
+	$this->setDesenha("");
+	$this->setDtcadastro(new DateTime());
+}
 
 public function __construct($login = "",$password = ""){
 	$this->SetDeslogin($login);

@@ -33,12 +33,21 @@ $aluno = new Usuario("aluno","lun0");
 $aluno->insert();
 echo $aluno;*/
 
+//update
+/*
 $usuario = new Usuario();
 $usuario->loadById(8);
 
 $usuario->update("professor","professor");
 
 echo $usuario;
+*/
 
+//delete
+$usuario = new Usuario();
+$usuario->loadById(7);
+echo $usuario;
+$usuario->delete();
+echo $usuario;
 
  ?> 
